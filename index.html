@@ -10,7 +10,7 @@
 
 <body>
     <div id="quadroGrafico">
-    <canvas id="grafico" width="500" height="300"></canvas>
+        <canvas id="grafico" width="500" height="300"></canvas>
     </div>
     <br>
     <div id="inputs">
@@ -25,17 +25,30 @@
         aleatório</button>
     <div id="editorAleatorio">
         <div id="minMax">
-        <input id="aleatorioX" title="Valor máximo que o eixo X pode ter" placeholder="Valor máximo X">
-        <input id="aleatorioY" title="Valor máximo que o eixo Y pode ter" placeholder="Valor máximo Y">
+            <input id="aleatorioX" title="Valor máximo que o eixo X pode ter" placeholder="Valor máximo X">
+            <input id="aleatorioY" title="Valor máximo que o eixo Y pode ter" placeholder="Valor máximo Y">
         </div>
         <div id="eixos">
-        <button id="reduzirEixos" onclick="reduzirEixos()">-</button>
-        <p id="quantEixos">1</p>
-        <button id="aumentarEixos" onclick="adicionarEixos()">+</button> 
+            <button id="reduzirEixos" onclick="reduzirEixos()">-</button>
+            <p id="quantEixos">1</p>
+            <button id="aumentarEixos" onclick="adicionarEixos()">+</button>
         </div>
         <button onclick="aleatorio2()">Criar gráfico</button>
         <button id="fadeOut" onclick="fadeout()">Sair</button>
     </div>
+        <button onclick="dados()">Checar dados</button>
+        <div id="tabelaDeDados">
+            <table id="tabelinhaDeDados">
+                <tr>
+                    <th class="header">Período</th>
+                    <th class="header">X</th>
+                    <th class="header">Y</th>
+                    <th class="header">Diferença</th>
+                    <th class="header">Porcentagem de Aumento</th>
+                </tr>
+                
+            </table>
+        </div>
     <script src="script.js"></script>
 </body>
 

@@ -20,7 +20,7 @@ function desenha() {
     for (let i = 0; i < ndevaloresX.length; i++) {
         lapis.lineTo(ndevaloresX[i], ndevaloresY[i])
         lapis.arc(ndevaloresX[i], ndevaloresY[i], 2, 0, 2 * Math.PI)
-        lapis.font = '10px roboto'
+        lapis.font = 'bold 10px roboto'
         lapis.fillText(ndevaloresY[i], X - 15, ndevaloresY[i])
         if (cimaoubaixo) {
             lapis.fillText(ndevaloresX[i], ndevaloresX[i] - 5, Y)
@@ -50,6 +50,31 @@ function desenha() {
         }
     }
 }
+function dados() {
+    let tabelinha = document.getElementById('tabelinhaDeDados')
+    let row = document.createElement('tr')
+    tabelinha.appendChild(row)
+    console.log(ndevaloresX)
+    let headers = document.getElementsByClassName('header')
+    let arrayHeaders = Array.from(headers)
+    let periodo = 1
+    arrayHeaders.forEach((header) => {
+        row = document.createElement('tr')
+        row.classList.add('row')
+        tabelinha.appendChild(row)  
+})
+    let rows = document.getElementsByClassName('row')
+    let arrayRow = Array.from(rows)
+    let inputX = document.getElementsByClassName('valorX')
+    let inputsX = Array.from(inputX)
+    inputX.forEach(input => {
+        let celula = document.createElement('td')
+        celula.textContent = 'Oi'
+        row.appendChild(celula)
+    })
+}
+
+
 enviar.addEventListener('click', () => {
     let arrayX = Array.from(inputX)
     let arrayY = Array.from(inputY)
@@ -60,11 +85,11 @@ enviar.addEventListener('click', () => {
         if (!valorX.value) {
             caixasVazias++
             alert(`Existem ${caixasVazias} caixas com valores vazias`)
-            return 
+            return
         }
         else if (isNaN(Number(valorX.value))) {
             alert('Insira apenas números')
-            return 
+            return
         }
         ndevaloresX.push(Number(valorX.value))
         ndevaloresX.sort((a, b) => a - b)
@@ -75,20 +100,20 @@ enviar.addEventListener('click', () => {
         if (!valorY.value) {
             caixasVazias++
             alert(`Existem ${caixasVazias} caixas com valores vazias`)
-            return 
+            return
         }
         else if (isNaN(Number(valorY.value))) {
             alert('Insira apenas números')
-            return 
+            return
         }
         ndevaloresY.push(Number(valorY.value))
     });
-    let Ysort = ndevaloresY.sort((a,b) => a-b)
-        if (Ysort[Ysort.length - 1] > canvas.height){
+    let Ysort = ndevaloresY.sort((a, b) => a - b)
+    if (Ysort[Ysort.length - 1] > canvas.height) {
         canvas.height = Ysort[Ysort.length - 1]
         Y = canvas.height
-        }
-    
+    }
+
     desenha()
 })
 function adicionar() {
@@ -105,60 +130,61 @@ function adicionar() {
     div.appendChild(novoinputY)
 }
 function aleatorio1() {
-   let editor = document.getElementById('editorAleatorio')
-   editor.style.display = 'flex' 
+    let editor = document.getElementById('editorAleatorio')
+    editor.style.display = 'flex'
 }
 function remover() {
-    if (inputs.childElementCount == 1){
+    if (inputs.childElementCount == 1) {
         alert('É necessário haver no mínimo 1 conjunto de valores')
         return
     }
     inputs.lastElementChild.remove()
 }
 
-function adicionarEixos(){
+function adicionarEixos() {
     document.getElementById('quantEixos').textContent++
 }
-function reduzirEixos(){
-    if(document.getElementById('quantEixos').textContent == 1){
+function reduzirEixos() {
+    if (document.getElementById('quantEixos').textContent == 1) {
         alert('É necessário haver no mínimo 1 conjunto de valores')
         return
     }
     document.getElementById('quantEixos').textContent--
 }
 
-function aleatorio2(){
+function aleatorio2() {
     let quantValores = document.getElementById('quantEixos').textContent
     let maximoX = document.getElementById('aleatorioX').value
     let maximoY = document.getElementById('aleatorioY').value
     let arrayatorioX = []
     let arrayatorioY = []
-    if (!maximoX|| !maximoY){
+    if (!maximoX || !maximoY) {
         alert('Existem uma ou mais caixas com valores máximos não especificados')
         return
     }
-    for(let i = quantValores; i > 0; i--){
+    for (let i = quantValores; i > 0; i--) {
         arrayatorioX.push(Math.floor(Math.random() * maximoX))
     }
-    for(let i = quantValores; i > 0; i--){
+    for (let i = quantValores; i > 0; i--) {
         arrayatorioY.push(Math.floor(Math.random() * maximoY))
     }
-    arrayatorioX.sort((a,b) => a-b)
-    let Ysort = arrayatorioY.sort((a,b) => a-b)
-        if (Ysort[Ysort.length - 1] > canvas.height){
+    arrayatorioX.sort((a, b) => a - b)
+    let Ysort = arrayatorioY.sort((a, b) => a - b)
+    if (Ysort[Ysort.length - 1] > canvas.height) {
         canvas.height = Ysort[Ysort.length - 1]
         Y = canvas.height
-        }
+    }
     ndevaloresX = arrayatorioX
     ndevaloresY = arrayatorioY
     desenha()
 }
-    function fadeout(){
-        let editor = document.getElementById('editorAleatorio')
-        editor.classList.add('fadeout')
-        setTimeout(() => {
-            editor.style.display = 'none'
-            editor.classList.remove('fadeout')
-        }, 500);
+function fadeout() {
+    let editor = document.getElementById('editorAleatorio')
+    editor.style.animation = 'fadeOut 0.5s ease'
+    setTimeout(() => {
+        editor.style.display = 'none'
+        editor.style.animation = 'fadeIn 0.5s ease'
+    }, 450);
 
-    }
+}
+

@@ -1,23 +1,26 @@
-body{
+body {
     z-index: 1;
 }
-#quadroGrafico{
+
+#quadroGrafico {
     position: relative;
     border: 2px solid black;
-     height: fit-content;
+    height: fit-content;
     width: fit-content;
 }
-#quadroGrafico::before{
+
+#quadroGrafico::before {
     content: "";
     inset: 0;
     position: absolute;
-    background-image: 
-    linear-gradient(to right, black 1px, transparent 1px),
-    linear-gradient(to bottom, black 1px, transparent 1px);
+    background-image:
+        linear-gradient(to right, black 1px, transparent 1px),
+        linear-gradient(to bottom, black 1px, transparent 1px);
     background-size: 10px 10px;
     opacity: 0.5;
 }
-#grafico{
+
+#grafico {
     z-index: 2;
     position: relative;
 }
@@ -33,7 +36,7 @@ button {
     flex-direction: column;
 }
 
-#editorAleatorio{
+#editorAleatorio {
     align-items: center;
     justify-content: center;
     height: fit-content;
@@ -46,49 +49,65 @@ button {
     z-index: 2;
     border-radius: 10px;
     left: 200px;
-    bottom: 275px;
+    top: 385px;
     animation: fadeIn 0.5s ease;
-    
+
 }
-.fadeout{
+
+.fadeout {
     animation: fadeOut 0.5s ease;
 }
-#minMax{
+
+#minMax {
     display: flex;
 }
-#aleatorioX, #aleatorioY{
+
+#aleatorioX,
+#aleatorioY {
     width: 50px;
 }
 
-#eixos{
+#eixos {
     height: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-#quantEixos{
+
+#quantEixos {
     padding-left: 5px;
     padding-right: 5px;
 }
+#tabelaDeDados{
+    width: fit-content;
+    height: 300px;
+    background-color: red;
+}
 
+th, tr, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
 @keyframes fadeIn {
-    0%{
+    0% {
         transform: translateY(-10px);
         opacity: 0;
     }
-    100%{
+
+    100% {
         transform: translateY(0px);
         opacity: 1;
     }
 }
 
 @keyframes fadeOut {
-    0%{
+    0% {
         transform: translateY(0px);
         opacity: 1;
     }
-    100%{
-        transform: translateY(-10px);
+
+    100% {
+        transform: translateY(10px);
         opacity: 0;
     }
 }
