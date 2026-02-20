@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="quadroGrafico">
+    <canvas id="grafico" width="500" height="300"></canvas>
+    </div>
+    <br>
+    <div id="inputs">
+        <div class="XeY"><input class="valorX" type="text" placeholder="Coloque um valor X"></input>
+            <input class="valorY" placeholder="Coloque um valor Y">
+        </div>
+    </div>
+    <button id="adiciona" title="Adicionar valores" onclick="adicionar()">+</button>
+    <button id="remover" onclick="remover()" title="Remover valores">-</button>
+    <button id="enviar" title="Construa o gráfico com base nas informações fornecidas">Construa o gráfico</button>
+    <button id="aleatorio" onclick="aleatorio1()" title="Crie um gráfico com valores aleatórios">Crie um gráfico
+        aleatório</button>
+    <div id="editorAleatorio">
+        <div id="minMax">
+        <input id="aleatorioX" title="Valor máximo que o eixo X pode ter" placeholder="Valor máximo X">
+        <input id="aleatorioY" title="Valor máximo que o eixo Y pode ter" placeholder="Valor máximo Y">
+        </div>
+        <div id="eixos">
+        <button id="reduzirEixos" onclick="reduzirEixos()">-</button>
+        <p id="quantEixos">1</p>
+        <button id="aumentarEixos" onclick="adicionarEixos()">+</button> 
+        </div>
+        <button onclick="aleatorio2()">Criar gráfico</button>
+        <button id="fadeOut" onclick="fadeout()">Sair</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
