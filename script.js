@@ -55,22 +55,47 @@ function dados() {
     let row = document.createElement('tr')
     tabelinha.appendChild(row)
     console.log(ndevaloresX)
-    let headers = document.getElementsByClassName('header')
-    let arrayHeaders = Array.from(headers)
     let periodo = 1
-    arrayHeaders.forEach((header) => {
-        row = document.createElement('tr')
-        row.classList.add('row')
-        tabelinha.appendChild(row)  
-})
-    let rows = document.getElementsByClassName('row')
-    let arrayRow = Array.from(rows)
     let inputX = document.getElementsByClassName('valorX')
     let inputsX = Array.from(inputX)
-    inputX.forEach(input => {
+    inputsX.forEach((input) => {
+        row = document.createElement('tr')
+        row.classList.add('row')
+        tabelinha.appendChild(row)
+    })
+    let rows = document.getElementsByClassName('row')
+    let arrayRow = Array.from(rows)
+    arrayRow.forEach((row, index) => {
         let celula = document.createElement('td')
-        celula.textContent = 'Oi'
-        row.appendChild(celula)
+        switch (index) {
+            case 0:
+                celula = document.createElement('td')
+                celula.textContent = periodo
+                row.appendChild(celula)
+                periodo++
+                break
+            case 1:
+                celula = document.createElement('td')
+                celula.textContent = ndevaloresX[periodo - 2]
+                row.append(celula)
+                break
+
+            case 2:
+                celula = document.createElement('td')
+                celula.textContent = ndevaloresY[periodo - 2]
+                row.append(celula)
+                break
+            case 3:
+                celula = document.createElement('td')
+                celula.textContent = (ndevaloresY[periodo - 1] - ndevaloresY[periodo - 2])
+                row.append(celula)
+                break
+            case 4:
+                celula = document.createElement('td')
+                celula.textContent = (((ndevaloresY[periodo - 1] - ndevaloresY[periodo - 2]) / ndevaloresY[periodo - 2]) * 100).toFixed(2)
+                row.append(celula)
+                break
+        }
     })
 }
 
