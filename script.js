@@ -10,16 +10,20 @@ let ndevaloresX = []
 let ndevaloresY = []
 let X = canvas.width
 let Y = canvas.height
+let periodo = undefined
 function desenha() {
     let cimaoubaixo = true
     lapis.clearRect(0, 0, X, Y)
     lapis.beginPath()
     lapis.setLineDash([])
+    periodo = 1
     lapis.lineWidth = 2
     lapis.moveTo(0, 200)
     for (let i = 0; i < ndevaloresX.length; i++) {
         lapis.lineTo(ndevaloresX[i], ndevaloresY[i])
         lapis.arc(ndevaloresX[i], ndevaloresY[i], 2, 0, 2 * Math.PI)
+        dados()
+        console.log(periodo)
         lapis.font = 'bold 10px roboto'
         lapis.fillText(ndevaloresY[i], X - 15, ndevaloresY[i])
         if (cimaoubaixo) {
@@ -55,7 +59,12 @@ function dados() {
     let row = document.createElement('tr')
     tabelinha.appendChild(row)
     console.log(ndevaloresX)
-    let periodo = 1
+    tabelinha.innerHTML = `<tr>
+                <th class="header">Período</th>
+                <th class="header">X</th>
+                <th class="header">Y</th>
+                <th class="header">Diferença</th>
+                <th class="header">Porcentagem de Aproveitamento</th></tr>`
     let inputX = document.getElementsByClassName('valorX')
     let inputsX = Array.from(inputX)
     inputsX.forEach((input) => {
@@ -65,39 +74,26 @@ function dados() {
     })
     let rows = document.getElementsByClassName('row')
     let arrayRow = Array.from(rows)
-    arrayRow.forEach((row, index) => {
-        let celula = document.createElement('td')
-        switch (index) {
-            case 0:
-                celula = document.createElement('td')
-                celula.textContent = periodo
-                row.appendChild(celula)
-                periodo++
-                break
-            case 1:
-                celula = document.createElement('td')
-                celula.textContent = ndevaloresX[periodo - 2]
-                row.append(celula)
-                break
-
-            case 2:
-                celula = document.createElement('td')
-                celula.textContent = ndevaloresY[periodo - 2]
-                row.append(celula)
-                break
-            case 3:
-                celula = document.createElement('td')
-                celula.textContent = (ndevaloresY[periodo - 1] - ndevaloresY[periodo - 2])
-                row.append(celula)
-                break
-            case 4:
-                celula = document.createElement('td')
-                celula.textContent = (((ndevaloresY[periodo - 1] - ndevaloresY[periodo - 2]) / ndevaloresY[periodo - 2]) * 100).toFixed(2)
-                row.append(celula)
-                break
+    arrayRow.forEach((row) => {
+        let diferenca = 'Valor inicial'
+        let porcentagem = 'Valor inicial'
+        if ((ndevaloresY.length - 1) >= 1){
+            diferenca = Math.abs(ndevaloresY[periodo] - ndevaloresY[periodo-1])
         }
-    })
+        if ((ndevaloresY.length - 1) >= 1){
+            porcentagem = (((ndevaloresY[ndevaloresY.length-1] - ndevaloresY[ndevaloresY.length-2]) / ndevaloresY[ndevaloresY.length-2]) * 100).toFixed(2)
+        }
+       row.innerHTML = `<td>${periodo}</td>
+                       <td>${ndevaloresX[periodo-1]}
+                       <td>${ndevaloresY[periodo-1]}
+                       <td>${diferenca}</td>
+                       <td>${porcentagem}</td>`
+        
+        periodo++
+    }
+    )
 }
+
 
 
 enviar.addEventListener('click', () => {
@@ -199,9 +195,14 @@ function aleatorio2() {
         canvas.height = Ysort[Ysort.length - 1]
         Y = canvas.height
     }
+    if (arrayatorioX[arrayatorioX.length - 1] > canvas.width) {
+        canvas.width = arrayatorioX[arrayatorioX.length - 1]
+        X = canvas.width
+    }
     ndevaloresX = arrayatorioX
     ndevaloresY = arrayatorioY
     desenha()
+    dados()
 }
 function fadeout() {
     let editor = document.getElementById('editorAleatorio')
